@@ -1,7 +1,11 @@
 package com.example.arthropoquizz
 
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import kotlinx.android.synthetic.main.activity_quiz.*
 
 class QuizzActivity : AppCompatActivity() {
@@ -29,5 +33,33 @@ class QuizzActivity : AppCompatActivity() {
         answer1.setText(quiz.answer1)
         answer2.setText(quiz.answer2)
         answer3.setText(quiz.answer3)
+    }
+    fun handleAnswer(answerID: Int) {
+        val quiz = quizzes.get(currentQuizIndex)
+        if (quiz.isCorrect(answerID)) {
+            numberOfGoodAnswers++
+            Toast.makeText(this, "+1", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            Toast.makeText(this, "+0", Toast.LENGTH_SHORT).show()
+        }
+        currentQuizIndex++
+        if (currentQuizIndex >= quizzes.size) {
+            var alert = AlertDialog.Builder(this)
+            alert.setTitle("Partie terminée")
+            alert.setMessage("Tu as fait un score de " + numberOfGoodAnswers)
+            alert.setPositiveButton("OK"){dialog: DialogInterface?, which: Int -> finish() }
+        }
+    } else
+    (showQuestion(quizzes.get(currentQuizIndex)))
+
+    fun onCLickAnswerOne(view: View) {
+         handleAnswer(1)
+    }
+    fun onCLickAnswerTwo(view: View) {
+            handleAnswer(2)
+    }
+    fun onCLickAnswerThree(view: View) {
+           handleAnswer(3)
     }
 }
