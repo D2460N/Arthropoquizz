@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Arthropoquizz</string>
+    <string name="txtQuestion">TextView</string>
+    <string name="answer1">TextView</string>
+    <string name="answer2">TextView</string>
+    <string name="answer3">TextView</string>
+</resources>
